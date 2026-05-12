@@ -1,5 +1,6 @@
 package com.mechanic.mechanical_management.controller;
 
+import com.mechanic.mechanical_management.dto.client.CreateClientRequest;
 import com.mechanic.mechanical_management.model.entities.Client;
 import com.mechanic.mechanical_management.service.ClientService;
 import jakarta.validation.Valid;
@@ -23,9 +24,8 @@ public class ClientController {
         return service.findById(id);
     }
 
-    @PostMapping
-    public Client create(@Valid @RequestBody Client c) {
-        return service.save(c);
+    public Client save(@Valid @RequestBody CreateClientRequest request) {
+        return service.save(request);
     }
 
     @DeleteMapping("/{id}")

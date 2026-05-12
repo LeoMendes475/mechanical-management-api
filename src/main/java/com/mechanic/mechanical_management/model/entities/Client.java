@@ -22,15 +22,22 @@ import java.time.LocalDateTime;
 @SQLDelete(sql = "UPDATE client SET deleted_at = CURRENT_TIMESTAMP WHERE id = ?")
 @SQLRestriction("deleted_at IS NULL")
 public class Client {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotBlank
     private String name;
-    @CPF
+
+    @Column(unique = true)
     private String cpf;
-    private String ddd;
+
     private String phone;
+    private String email;
+    private String address;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
