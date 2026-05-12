@@ -4,6 +4,8 @@ import com.mechanic.mechanical_management.model.entities.ServiceOrder;
 import com.mechanic.mechanical_management.service.ServiceOrderService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/service-orders")
 public class ServiceOrderController {
@@ -26,5 +28,20 @@ public class ServiceOrderController {
             @RequestParam Integer quantity
     ) {
         return service.createServiceOrder(id, sparePartId, quantity);
+    }
+
+    @GetMapping()
+    public List<ServiceOrder> findAll() {
+        return service.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ServiceOrder findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
     }
 }
