@@ -20,6 +20,8 @@ public class Vehicle {
     @Column(name = "manufacture_year")
     private Integer year;
 
+    private Integer mileage;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;

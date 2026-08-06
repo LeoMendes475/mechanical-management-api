@@ -32,8 +32,8 @@ public class ServiceOrder {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
+        @LastModifiedDate
+        private LocalDateTime updatedAt;
 
-    private LocalDateTime deletedAt;
+        private LocalDateTime deletedAt;
 }

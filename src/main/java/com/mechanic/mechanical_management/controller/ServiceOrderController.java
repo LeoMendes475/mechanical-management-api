@@ -1,7 +1,10 @@
 package com.mechanic.mechanical_management.controller;
 
+import com.mechanic.mechanical_management.dto.serviceorder.CreateServiceOrderRequest;
+import com.mechanic.mechanical_management.dto.serviceorder.UpdateServiceOrderStatusRequest;
 import com.mechanic.mechanical_management.model.entities.ServiceOrder;
 import com.mechanic.mechanical_management.service.ServiceOrderService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +20,16 @@ public class ServiceOrderController {
     }
 
     @PostMapping
-    public ServiceOrder save(@RequestBody ServiceOrder serviceOrder) {
-        return service.save(serviceOrder);
+    public ServiceOrder save(@Valid @RequestBody CreateServiceOrderRequest request) {
+        return service.create(request);
+    }
+
+    @PatchMapping("/{id}/status")
+    public ServiceOrder updateStatus(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateServiceOrderStatusRequest request
+    ) {
+        return service.updateStatus(id, request.getStatus());
     }
 
     @PostMapping("/{id}/spare-parts")
