@@ -24,7 +24,8 @@ public class ClientController {
         return service.findById(id);
     }
 
-    public Client save(@Valid @RequestBody CreateClientRequest request) {
+    @PostMapping
+    public Client create(@Valid @RequestBody CreateClientRequest request) {
         return service.save(request);
     }
 
