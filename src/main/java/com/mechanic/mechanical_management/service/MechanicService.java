@@ -1,7 +1,7 @@
 package com.mechanic.mechanical_management.service;
 
 import com.mechanic.mechanical_management.dto.mechanic.CreateMechanicRequest;
-import com.mechanic.mechanical_management.model.entities.Mechanic;
+import com.mechanic.mechanical_management.model.entities.model.Mechanic;
 import com.mechanic.mechanical_management.repository.MechanicRepository;
 import org.springframework.stereotype.Service;
 
