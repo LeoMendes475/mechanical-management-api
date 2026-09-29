@@ -23,10 +23,10 @@ public class SparePartController{
     }
 
     @GetMapping()
-    public List<SparePart> ListAll() { service.listAll(); }
+    public List<SparePart> listAll() { service.listAll(); }
 
     @GetMapping("/{id}")
-    public SparePart ListById(@PathVariable Long id) { this.service.listById(id);}
+    public SparePart listById(@PathVariable Long id) { this.service.listById(id);}
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {

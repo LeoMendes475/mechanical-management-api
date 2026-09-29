@@ -23,10 +23,10 @@ public class MechanicController{
     }
 
     @GetMapping()
-    public List<Mechanic> ListAll() { service.listAll(); }
+    public List<Mechanic> listAll() { service.listAll(); }
 
     @GetMapping("/{id}")
-    public Mechanic ListById(@PathVariable Long id) { this.service.listById(id);}
+    public Mechanic listById(@PathVariable Long id) { this.service.listById(id);}
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
