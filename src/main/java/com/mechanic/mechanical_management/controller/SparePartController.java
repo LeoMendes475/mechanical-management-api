@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.mechanic.mechanical_management.service.SparePartService;
 import com.mechanic.mechanical_management.model.entities.SparePart;
-import com.mechanic.mechanical_management.dto.spartepart.CreateSparePartRequest;
+import com.mechanic.mechanical_management.dto.sparepart.CreateSparePartRequest;
 
 @RestController
 @RequestMapping("/spare-part")
@@ -18,15 +18,15 @@ public class SparePartController{
     }
 
     @PostMapping
-    public SparePart save(@Valid @RequestBody CreateSparePartRequest request) {
+    public SparePart create(@Valid @RequestBody CreateSparePartRequest request) {
         return service.create(request);
     }
 
     @GetMapping()
-    public List<SparePart> listAll() { service.listAll(); }
+    public List<SparePart> listAll() { return service.listAll(); }
 
     @GetMapping("/{id}")
-    public SparePart listById(@PathVariable Long id) { this.service.listById(id);}
+    public SparePart listById(@PathVariable Long id) { return this.service.listById(id);}
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {

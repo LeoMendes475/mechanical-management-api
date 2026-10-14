@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import com.mechanic.mechanical_management.service.MechanicService;
-import com.mechanic.mechanical_management.model.Mechanic;
+import com.mechanic.mechanical_management.model.entities.Mechanic;
 import com.mechanic.mechanical_management.dto.mechanic.CreateMechanicRequest;
 
 @RestController
@@ -18,15 +18,15 @@ public class MechanicController{
     }
 
     @PostMapping
-    public Mechanic save(@Valid @RequestBody CreateMechanicRequest request) {
+    public Mechanic create(@Valid @RequestBody CreateMechanicRequest request) {
         return service.create(request);
     }
 
     @GetMapping()
-    public List<Mechanic> listAll() { service.listAll(); }
+    public List<Mechanic> listAll() { return service.listAll(); }
 
     @GetMapping("/{id}")
-    public Mechanic listById(@PathVariable Long id) { this.service.listById(id);}
+    public Mechanic listById(@PathVariable Long id) { return this.service.listById(id);}
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
