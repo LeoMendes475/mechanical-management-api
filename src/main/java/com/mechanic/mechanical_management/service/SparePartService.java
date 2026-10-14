@@ -4,6 +4,7 @@ import com.mechanic.mechanical_management.dto.sparepart.CreateSparePartRequest;
 import com.mechanic.mechanical_management.model.entities.SparePart;
 import com.mechanic.mechanical_management.repository.SparePartRepository;
 import org.springframework.stereotype.Service;
+import com.mechanic.mechanical_management.exception.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -21,6 +22,6 @@ public class SparePartService {
         sparePart.setSalePrice(request.getSalePrice());
         return repo.save(sparePart);
     }
-    public SparePart listById(Long id) { return repo.findById(id).orElseThrow(); }
+    public SparePart listById(Long id) { return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Peça " + id + " não encontrado")); }
     public void delete(Long id) { repo.deleteById(id); }
 }

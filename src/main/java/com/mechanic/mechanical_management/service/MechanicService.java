@@ -4,6 +4,7 @@ import com.mechanic.mechanical_management.dto.mechanic.CreateMechanicRequest;
 import com.mechanic.mechanical_management.model.entities.Mechanic;
 import com.mechanic.mechanical_management.repository.MechanicRepository;
 import org.springframework.stereotype.Service;
+import com.mechanic.mechanical_management.exception.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -19,6 +20,6 @@ public class MechanicService {
         mechanic.setSpecialty(request.getSpecialty());
         return repo.save(mechanic);
     }
-    public Mechanic listById(Long id) { return repo.findById(id).orElseThrow(); }
+    public Mechanic listById(Long id) { return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Mecanico " + id + " não encontrado")); }
     public void delete(Long id) { repo.deleteById(id); }
 }

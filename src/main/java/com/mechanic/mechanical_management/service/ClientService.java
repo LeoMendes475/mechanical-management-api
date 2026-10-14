@@ -7,6 +7,7 @@ import com.mechanic.mechanical_management.repository.ClientRepository;
 import com.mechanic.mechanical_management.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.mechanic.mechanical_management.exception.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -41,6 +42,6 @@ public class ClientService {
     }
 
     public List<Client> findAll() { return repo.findAll(); }
-    public Client findById(Long id) { return repo.findById(id).orElseThrow(); }
+    public Client findById(Long id) { return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Cliente " + id + " não encontrado")); }
     public void delete(Long id) { repo.deleteById(id); }
 }

@@ -13,6 +13,7 @@ import com.mechanic.mechanical_management.repository.ServiceOrderRepository;
 import com.mechanic.mechanical_management.repository.ServiceOrderSparePartRepository;
 import com.mechanic.mechanical_management.repository.SparePartRepository;
 import com.mechanic.mechanical_management.repository.VehicleRepository;
+import com.mechanic.mechanical_management.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -87,7 +88,7 @@ public class ServiceOrderService {
     @Transactional
     public ServiceOrder updateStatus(Long id, WorkOrderStatus status) {
         ServiceOrder order = serviceOrderRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("OS não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("OS " + id + " não encontrada"));
         order.setStatus(status);
         return serviceOrderRepository.save(order);
     }
@@ -97,15 +98,15 @@ public class ServiceOrderService {
 
         // busca a OS
         ServiceOrder order = serviceOrderRepository.findById(serviceOrderId)
-                .orElseThrow(() -> new RuntimeException("OS não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("OS " + serviceOrderId + " não encontrada"));
 
         // busca a peça
         SparePart sparePart = sparePartRepository.findById(sparePartId)
-                .orElseThrow(() -> new RuntimeException("Peça não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("peça " + sparePartId + " não encontrada"));
 
         // valida estoque
         if (sparePart.getQuantity() < quantity) {
-            throw new RuntimeException(
+            throw new ResourceNotFoundException(
                     "Estoque insuficiente. Disponível: " + sparePart.getQuantity()
             );
         }
@@ -126,6 +127,6 @@ public class ServiceOrderService {
         return serviceOrderRepository.findById(serviceOrderId).get();
     }
 
-    public ServiceOrder findById(Long id) { return serviceOrderRepository.findById(id).orElseThrow(); }
+    public ServiceOrder findById(Long id) { return serviceOrderRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Ordem de serviço " + id + " não encontrado")); }
     public void delete(Long id) { serviceOrderRepository.deleteById(id); }
 }

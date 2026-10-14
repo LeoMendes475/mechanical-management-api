@@ -5,6 +5,7 @@ import com.mechanic.mechanical_management.model.entities.Vehicle;
 import com.mechanic.mechanical_management.repository.VehicleRepository;
 import com.mechanic.mechanical_management.repository.ClientRepository;
 import com.mechanic.mechanical_management.dto.vehicle.CreateVehicleRequest;
+import com.mechanic.mechanical_management.exception.ResourceNotFoundException;
 
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -36,7 +37,7 @@ public class VehicleService {
             vehicle.setBrand(request.getBrand());
 
             Client client = clientRepository.findById(request.getClientId())
-                    .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+                    .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
             vehicle.setClient(client);
 
             vehicle = repo.save(vehicle);
@@ -44,6 +45,6 @@ public class VehicleService {
 
         return repo.save(vehicle);
     }
-    public Vehicle listById(Long id) { return repo.findById(id).orElseThrow(); }
+    public Vehicle listById(Long id) { return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Veiculo " + id + " não encontrado")); }
     public void delete(long id) { repo.deleteById(id); }
 }
