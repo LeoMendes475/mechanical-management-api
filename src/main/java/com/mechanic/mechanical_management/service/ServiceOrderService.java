@@ -61,10 +61,9 @@ public class ServiceOrderService {
             vehicle.setModel(request.getVehicleModel());
             vehicle.setYear(request.getVehicleYear());
             vehicle.setMileage(request.getMileage());
-            vehicle.setBrand(request.getBrand());
 
             if (request.getClientName() != null && !request.getClientName().isBlank()) {
-                Client client = clientRepository.findById(request.getClientId())
+                Client client = clientRepository.findByNameIgnoreCase(request.getClientName())
                         .orElseGet(() -> {
                             Client newClient = new Client();
                             newClient.setName(request.getClientName());

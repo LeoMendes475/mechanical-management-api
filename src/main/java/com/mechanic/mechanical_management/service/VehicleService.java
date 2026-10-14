@@ -6,6 +6,7 @@ import com.mechanic.mechanical_management.repository.VehicleRepository;
 import com.mechanic.mechanical_management.repository.ClientRepository;
 import com.mechanic.mechanical_management.dto.vehicle.CreateVehicleRequest;
 
+import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service

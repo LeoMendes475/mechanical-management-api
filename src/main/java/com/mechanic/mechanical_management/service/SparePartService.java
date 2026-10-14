@@ -18,8 +18,8 @@ public class SparePartService {
         sparePart.setName(request.getName());
         sparePart.setCode(request.getCode());
         sparePart.setQuantity(request.getQuantity());
-        sparePart.setSalePrice(request.getSalePrice();
-        return repo.save(request);
+        sparePart.setSalePrice(request.getSalePrice());
+        return repo.save(sparePart);
     }
     public SparePart listById(Long id) { return repo.findById(id).orElseThrow(); }
     public void delete(Long id) { repo.deleteById(id); }
