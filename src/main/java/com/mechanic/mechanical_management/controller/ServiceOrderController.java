@@ -5,6 +5,7 @@ import com.mechanic.mechanical_management.dto.serviceorder.UpdateServiceOrderSta
 import com.mechanic.mechanical_management.model.entities.ServiceOrder;
 import com.mechanic.mechanical_management.service.ServiceOrderService;
 import jakarta.validation.Valid;
+import org.jspecify.annotations.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class ServiceOrderController {
     @PatchMapping("/{id}/status")
     public ServiceOrder updateStatus(
             @PathVariable Long id,
-            @Valid @RequestBody UpdateServiceOrderStatusRequest request
+            @Valid @RequestBody @NonNull UpdateServiceOrderStatusRequest request
     ) {
         return service.updateStatus(id, request.getStatus());
     }
