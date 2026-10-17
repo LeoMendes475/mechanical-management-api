@@ -20,7 +20,7 @@ public class ServiceOrderController {
     }
 
     @PostMapping
-    public ServiceOrder save(@Valid @RequestBody CreateServiceOrderRequest request) {
+    public ServiceOrder create(@Valid @RequestBody CreateServiceOrderRequest request) {
         return service.create(request);
     }
 
@@ -32,13 +32,13 @@ public class ServiceOrderController {
         return service.updateStatus(id, request.getStatus());
     }
 
-    @PostMapping("/{id}/spare-parts")
+    @PatchMapping("/{id}/spare-part")
     public ServiceOrder addSparePart(
             @PathVariable Long id,
             @RequestParam Long sparePartId,
             @RequestParam Integer quantity
     ) {
-        return service.createServiceOrder(id, sparePartId, quantity);
+        return service.addSparePart(id, sparePartId, quantity);
     }
 
     @GetMapping()

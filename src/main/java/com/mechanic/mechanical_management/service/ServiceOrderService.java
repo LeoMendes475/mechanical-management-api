@@ -95,7 +95,7 @@ public class ServiceOrderService {
     }
 
     @Transactional
-    public ServiceOrder createServiceOrder(Long serviceOrderId, Long sparePartId, Integer quantity) {
+    public ServiceOrder addSparePart(Long serviceOrderId, Long sparePartId, Integer quantity) {
 
         // busca a OS
         ServiceOrder order = serviceOrderRepository.findById(serviceOrderId)
@@ -108,7 +108,7 @@ public class ServiceOrderService {
         // valida estoque
         if (sparePart.getQuantity() < quantity) {
             throw new InsufficientStockException(
-                    "Estoque insuficiente. Disponível: " + sparePart.getQuantity()
+                    "Estoque insuficiente - " + sparePart.getName() + ". Disponível: " + sparePart.getQuantity()
             );
         }
 
