@@ -1,6 +1,7 @@
 package com.mechanic.mechanical_management.service;
 
 import com.mechanic.mechanical_management.dto.serviceorder.CreateServiceOrderRequest;
+import com.mechanic.mechanical_management.exception.InsufficientStockException;
 import com.mechanic.mechanical_management.model.WorkOrderStatus;
 import com.mechanic.mechanical_management.model.entities.Client;
 import com.mechanic.mechanical_management.model.entities.Mechanic;
@@ -106,7 +107,7 @@ public class ServiceOrderService {
 
         // valida estoque
         if (sparePart.getQuantity() < quantity) {
-            throw new ResourceNotFoundException(
+            throw new InsufficientStockException(
                     "Estoque insuficiente. Disponível: " + sparePart.getQuantity()
             );
         }
