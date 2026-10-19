@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CreateVehicleRequest {
 
+    @NotNull
     @NotBlank
     private String licensePlate;
 
