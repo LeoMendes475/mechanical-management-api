@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
+
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
@@ -65,10 +67,23 @@ public class GlobalExceptionHandler {
         ApiError body = new ApiError(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
-                "Erro interno do servidor",
+                "Internal server error",
                 LocalDateTime.now()
         );
-        log.error("Erro inesperado", ex);
+        log.error("Unexpected error", ex);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
+    }
+
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<ApiError> handleResourceNotFound(NoResourceFoundException ex) {
+        ApiError body = new ApiError(
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                "Path not found " + ex.getResourcePath(),
+                LocalDateTime.now()
+        );
+        log.error("Path not found /", ex);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
     }
 }
