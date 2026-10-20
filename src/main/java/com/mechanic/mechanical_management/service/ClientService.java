@@ -42,6 +42,6 @@ public class ClientService {
     }
 
     public List<Client> findAll() { return repo.findAll(); }
-    public Client findById(Long id) { return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Cliente " + id + " não encontrado")); }
+    public Client findById(Long id) { return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Client " + id + " not found.")); }
     public void delete(Long id) { repo.deleteById(id); }
 }

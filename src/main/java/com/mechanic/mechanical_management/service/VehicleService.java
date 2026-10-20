@@ -31,11 +31,11 @@ public class VehicleService {
 
         Optional<Vehicle> plateExist = repo.findByLicensePlateIgnoreCase(request.getLicensePlate());
         if (plateExist.isPresent()) {
-            throw new DuplicateResourceException("Placa " + request.getLicensePlate()  + " já cadastrada");
+            throw new DuplicateResourceException("Plate " + request.getLicensePlate()  + " already exists.");
         }
 
         Client client = clientRepository.findById(request.getClientId())
-                .orElseThrow(() -> new ResourceNotFoundException("Cliente " + request.getClientId() + " não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Client " + request.getClientId() + " not found."));
         vehicle.setClient(client);
 
         vehicle.setLicensePlate(request.getLicensePlate());
@@ -46,6 +46,6 @@ public class VehicleService {
 
         return repo.save(vehicle);
     }
-    public Vehicle listById(Long id) { return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Veiculo " + id + " não encontrado")); }
+    public Vehicle listById(Long id) { return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Vehicle " + id + " not found.")); }
     public void delete(long id) { repo.deleteById(id); }
 }

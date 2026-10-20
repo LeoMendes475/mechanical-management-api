@@ -20,6 +20,6 @@ public class MechanicService {
         mechanic.setSpecialty(request.getSpecialty());
         return repo.save(mechanic);
     }
-    public Mechanic listById(Long id) { return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Mecanico " + id + " não encontrado")); }
+    public Mechanic listById(Long id) { return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Mechanic " + id + " not found.")); }
     public void delete(Long id) { repo.deleteById(id); }
 }

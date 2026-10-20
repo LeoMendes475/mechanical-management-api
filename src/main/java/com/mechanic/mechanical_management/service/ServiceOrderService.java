@@ -89,7 +89,7 @@ public class ServiceOrderService {
     @Transactional
     public ServiceOrder updateStatus(Long id, WorkOrderStatus status) {
         ServiceOrder order = serviceOrderRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("OS " + id + " não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Service order " + id + " not found."));
         order.setStatus(status);
         return serviceOrderRepository.save(order);
     }
@@ -99,16 +99,16 @@ public class ServiceOrderService {
 
         // busca a OS
         ServiceOrder order = serviceOrderRepository.findById(serviceOrderId)
-                .orElseThrow(() -> new ResourceNotFoundException("OS " + serviceOrderId + " não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Service order " + serviceOrderId + " not found."));
 
         // busca a peça
         SparePart sparePart = sparePartRepository.findById(sparePartId)
-                .orElseThrow(() -> new ResourceNotFoundException("peça " + sparePartId + " não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Part " + sparePartId + " not found."));
 
         // valida estoque
         if (sparePart.getQuantity() < quantity) {
             throw new InsufficientStockException(
-                    "Estoque insuficiente - " + sparePart.getName() + ". Disponível: " + sparePart.getQuantity()
+                    "Insufficient stock - " + sparePart.getName() + ". Available: " + sparePart.getQuantity()
             );
         }
 
@@ -128,6 +128,6 @@ public class ServiceOrderService {
         return serviceOrderRepository.findById(serviceOrderId).get();
     }
 
-    public ServiceOrder findById(Long id) { return serviceOrderRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Ordem de serviço " + id + " não encontrado")); }
+    public ServiceOrder findById(Long id) { return serviceOrderRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Service order " + id + " not found.")); }
     public void delete(Long id) { serviceOrderRepository.deleteById(id); }
 }

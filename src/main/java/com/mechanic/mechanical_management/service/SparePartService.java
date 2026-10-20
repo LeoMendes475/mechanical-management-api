@@ -22,6 +22,6 @@ public class SparePartService {
         sparePart.setSalePrice(request.getSalePrice());
         return repo.save(sparePart);
     }
-    public SparePart listById(Long id) { return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Peça " + id + " não encontrado")); }
+    public SparePart listById(Long id) { return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Part " + id + " not found.")); }
     public void delete(Long id) { repo.deleteById(id); }
 }
