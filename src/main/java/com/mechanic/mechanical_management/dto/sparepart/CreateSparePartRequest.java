@@ -13,16 +13,16 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class CreateSparePartRequest {
 
-    @NotBlank(message = "Nome é obrigatório")
+    @NotBlank(message = "Name is required")
     private String name;
 
     private String code;
 
-    @NotNull(message = "Quantidade é obrigatória")
-    @Min(value = 0, message = "Quantidade não pode ser negativa")
+    @NotNull(message = "Quantity is mandatory")
+    @Min(value = 0, message = "Quantity cannot be negative")
     private Integer quantity;
 
-    @NotNull(message = "Preço de venda é obrigatório")
-    @Positive(message = "Preço deve ser maior que zero")
+    @NotNull(message = "Selling price is mandatory")
+    @Positive(message = "Price must be greater than zero")
     private BigDecimal salePrice;
 }

@@ -12,22 +12,22 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CreateVehicleRequest {
 
-    @NotBlank(message = "Placa é obrigatória")
+    @NotBlank(message = "Sign is mandatory")
     private String licensePlate;
 
-    @NotBlank(message = "Modelo é obrigatório")
+    @NotBlank(message = "Model is mandatory")
     private String model;
 
-    @NotBlank(message = "Marca é obrigatória")
+    @NotBlank(message = "Brand is mandatory")
     private String brand;
 
-    @NotNull(message = "Ano é obrigatório")
-    @Positive(message = "Ano deve ser positivo")
+    @NotNull(message = "Year is mandatory")
+    @Positive(message = "The year should be positive")
     private Integer year;
 
-    @Positive(message = "Quilometragem deve ser positiva")
+    @Positive(message = "Mileage should be positive")
     private Integer mileage;
 
-    @NotNull(message = "Cliente é obrigatório")
+    @NotNull(message = "Customer is required")
     private Long clientId;
 }

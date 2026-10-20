@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateMechanicRequest {
 
-    @NotBlank(message = "Nome é obrigatório")
+    @NotBlank(message = "Name is required")
     private String name;
 
-    @NotBlank(message = "Especialidade é obrigatória")
+    @NotBlank(message = "Specialty is mandatory")
     private String specialty;
 }
